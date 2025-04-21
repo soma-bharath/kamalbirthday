@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday AMOS!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 2rem 1rem;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5a9b8, #fcd5ce);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      color: #fff;
+      font-weight: 900;
+      text-shadow: 3px 3px #e75480;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-20px);
+      }
+      60% {
+        transform: translateY(-10px);
+      }
+    }
+    p {
+      font-size: 1.5rem;
+      max-width: 700px;
+      margin-bottom: 2rem;
+      animation: fadeIn 2s ease-in;
+      line-height: 1.6;
+    }
+    .card {
+      background-color: #fff0f6;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      margin: 2rem;
+      animation: float 6s ease-in-out infinite;
+      z-index: 2;
+    }
+    .footer {
+      margin-top: 2rem;
+      font-size: 1rem;
+      color: #fff;
+      animation: fadeInUp 2s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    .confetti {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <canvas class="confetti"></canvas>
+  <div class="card">
+    <h1>🎉<b> <strong>Happy Birthday, AMOS!</strong> 🎂</b></h1>
+    <p>
+      Hey KAMAL,<br>
+      Bhoomi putinapudu putta antavvv mottaniki APRIL 22 (The Earth Day 😂 😂 😂)<br>
+      Wish you a many many many many mnay many more happy returns of the day paaaaaa 😍😍😍😍😍<br>
+      Putinaa roju jai jai lu chitti papayii neeku ilagey roju pandaga jaragali 😁😁😁😁😁<br>
+      Hmm.... I still remember Kamal days, months and even years passed with no contact with you<br>
+      but still when I needed u, the way you showed up with no questions asked means a lot to me 😍😍😍<br>
+      Thanks for everything KAMAL. You are really a great gift given to me by JESUS 😇😇😇<br><br>
+      Wishing you a day filled with love, laughter, and everything you’ve been dreaming of.<br>
+      You deserve all the happiness in the world. Thank you for being the wonderful person you are.<br>
+      Here's to many more adventures together and an amazing year ahead!
+    </p>
+    <p>🎈 Lots of love, hugs, and cake! to my GOD GIFTED CHILD🎈</p>
+    <p><strong>AMEN!</strong></p>
+  </div>
+  <div class="footer">Made with ❤️ just for you</div>
+
+  <script>
+    // Simple confetti effect using canvas
+    const canvas = document.querySelector('.confetti');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const confetti = [];
+
+    for (let i = 0; i < 150; i++) {
+      confetti.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 6 + 4,
+        d: Math.random() * 50,
+        color: `hsl(${Math.random() * 360}, 100%, 70%)`,
+        tilt: Math.random() * 10 - 10,
+        tiltAngle: 0,
+        tiltAngleIncrement: Math.random() * 0.1 + 0.05,
+      });
+    }
+
+    function drawConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      confetti.forEach((c) => {
+        ctx.beginPath();
+        ctx.lineWidth = c.r;
+        ctx.strokeStyle = c.color;
+        ctx.moveTo(c.x + c.tilt + c.r / 2, c.y);
+        ctx.lineTo(c.x + c.tilt, c.y + c.tilt + c.r / 2);
+        ctx.stroke();
+      });
+
+      updateConfetti();
+    }
+
+    function updateConfetti() {
+      confetti.forEach((c) => {
+        c.tiltAngle += c.tiltAngleIncrement;
+        c.y += Math.cos(c.d) + 1 + c.r / 2;
+        c.tilt = Math.sin(c.tiltAngle - c.d / 3) * 15;
+
+        if (c.y > canvas.height) {
+          c.y = -10;
+          c.x = Math.random() * canvas.width;
+        }
+      });
+    }
+
+    setInterval(drawConfetti, 20);
+
+    // Handle resize
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
